@@ -204,6 +204,7 @@ E struct obj *FDECL(o_material, (struct obj*,unsigned));
 E int FDECL(gold_detect, (struct obj *));
 E int FDECL(food_detect, (struct obj *));
 E int FDECL(object_detect, (struct obj *,int));
+E int FDECL(artifact_detect, (struct obj *));
 E int FDECL(monster_detect, (struct obj *,int));
 E int FDECL(trap_detect, (struct obj *));
 E const char *FDECL(level_distance, (d_level *));

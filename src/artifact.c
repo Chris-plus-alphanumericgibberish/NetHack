@@ -141,6 +141,7 @@ aligntyp alignment;	/* target alignment, or A_NONE */
 		    continue;	/* skip enemies' equipment */
 		else if (by_align && Role_if(a->role))
 		    goto make_artif;	/* 'a' points to the desired one */
+		else if(by_align && Role_if(PM_PIRATE)) continue; /* pirates are not gifted artifacts */
 		else
 		    eligible[n++] = m;
 	    }
@@ -1351,6 +1352,7 @@ arti_invoke(obj)
 	  }
 	case OBJECT_DET:
 		object_detect(obj, 0);
+		artifact_detect(obj);
 		break;
 	}
     } else {

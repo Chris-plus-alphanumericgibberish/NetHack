@@ -1101,6 +1101,7 @@ register struct obj	*sobj;
 		    make_confused(HConfusion + rnd(30), FALSE);
 		    break;
 		}
+		if(!(sobj->oartifact)){
 		pline("A map coalesces in your mind!");
 		cval = (sobj->cursed && !confused);
 		if(cval) HConfusion = 1;	/* to screw up map */
@@ -1108,6 +1109,15 @@ register struct obj	*sobj;
 		if(cval) {
 		    HConfusion = 0;		/* restore */
 		    pline("Unfortunately, you can't grasp the details.");
+		}
+		}
+		else{
+			if(sobj->age > monstermoves){
+				pline("The map %s hard to see.", vtense((char *)0,"are"));
+				nomul(rnd(3));
+				sobj->age += (long) d(3,10);
+			} else sobj->age = monstermoves + (long) d(3,10);
+			do_vicinity_map();
 		}
 		break;
 	case SCR_AMNESIA:
