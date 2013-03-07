@@ -633,7 +633,7 @@ at_your_feet(str)
 	}
 }
 
-#ifdef ELBERETH
+//ifdef ELBERETH
 STATIC_OVL void
 gcrownu()
 {
@@ -656,7 +656,11 @@ gcrownu()
     switch (u.ualign.type) {
     case A_LAWFUL:
 	u.uevent.uhand_of_elbereth = 1;
+#ifdef ELBERETH
 	verbalize("I crown thee...  The Hand of Elbereth!");
+#else
+		verbalize("I dub thee...  The Arm of the Law!");
+#endif
 	break;
     case A_NEUTRAL:
 	u.uevent.uhand_of_elbereth = 2;
@@ -781,7 +785,7 @@ gcrownu()
     update_inventory();
     return;
 }
-#endif	/*ELBERETH*/
+//endif	/*ELBERETH*/
 
 STATIC_OVL void
 pleased(g_align)

@@ -572,9 +572,9 @@ u_init()
 	u.ublessed = 0;				/* not worthy yet */
 	u.ugangr   = 0;				/* gods not angry */
 	u.ugifts   = 0;				/* no divine gifts bestowed */
-# ifdef ELBERETH
+// ifdef ELBERETH
 	u.uevent.uhand_of_elbereth = 0;
-# endif
+// endif
 	u.uevent.uheard_tune = 0;
 	u.uevent.uopened_dbridge = 0;
 	u.uevent.udemigod = 0;		/* not a demi-god yet... */
