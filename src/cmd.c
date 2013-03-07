@@ -851,7 +851,8 @@ int final;	/* 0 => still in progress; 1 => over, survived; 2 => dead */
 				"the Glory of Arioch"
 	    };
 #endif
-		you_are(hofe_titles[u.uevent.uhand_of_elbereth - 1]);
+	    if(Role_if(PM_PIRATE)) you_are("the Pirate King");
+		else you_are(hofe_titles[u.uevent.uhand_of_elbereth - 1]);
 	}
 	
 
