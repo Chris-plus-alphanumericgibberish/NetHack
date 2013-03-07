@@ -1085,7 +1085,7 @@ register struct obj	*sobj;
 		    make_confused(HConfusion + rnd(30), FALSE);
 		    break;
 		}
-		if (sobj->blessed) {
+		if (sobj->blessed && !(sobj->oartifact)) {
 		    register int x, y;
 
 		    for (x = 1; x < COLNO; x++)
