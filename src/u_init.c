@@ -98,11 +98,12 @@ static struct trobj Monk[] = {
 };
 static struct trobj Pirate[] = {
 #define PIR_KNIVES	1
-#define PIR_SNACK 4
-#define PIR_JEWELRY 6
-#define PIR_TOOL 7
+#define PIR_SNACK 5
+#define PIR_JEWELRY 7
+#define PIR_TOOL 8
 	{ SCIMITAR, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ KNIFE, 1, WEAPON_CLASS, 2, 0 },
+	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ HIGH_BOOTS, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ CRAM_RATION, 0, FOOD_CLASS, 2, UNDEF_BLESS },
 	{ BANANA, 0, FOOD_CLASS, 3, 0 },
@@ -591,6 +592,8 @@ u_init()
 	u.umoved = FALSE;
 	u.umortality = 0;
 	u.ugrave_arise = NON_PM;
+	
+	u.ukinghill = FALSE;
 
 	u.umonnum = u.umonster = (flags.female &&
 			urole.femalenum != NON_PM) ? urole.femalenum :

@@ -208,20 +208,20 @@ const struct Role roles[] = {
 },
 {	{"Pirate", 0}, {
 	{"Landlubber",  0},
-	{"Sailor",      0},
-	{"Mariner",     0},
-	{"Mutineer",    0},
-	{"Buccaneer",   0},
+	{"Swabbie",        	0},
 	{"Cutthroat",   0},
-	{"Corsair",     0},
-	{"Privateer",   0},
-	{"Dread Pirate",0} },
-	"Nereus", "Neptune", "Proteus",	/* Classical sea gods */
-	"Pir", "the Pirate King's lair", "the Major General's estate",
+	{"Bosun",      		0},
+	{"Second Mate",     0},
+	{"First Mate",      0},
+	{"Captain",			0},
+	{"Pirate Lord",   	0},
+	{"Dread Pirate",  	0} },
+	"the Lord", "_the deep blue sea", "the Devil",	/* Christian, sorta */
+	"Pir", "Tortuga", "Shipwreak Island",
 	PM_PIRATE, NON_PM, NON_PM,
-	PM_PIRATE_KING, PM_BUCCANEER, PM_MAJOR_GENERAL,
-	PM_SOLDIER, PM_SERGEANT, S_KOP, S_HUMAN,
-	ART_MARAUDER_S_MAP,
+	PM_DREAD_PIRATE__RET__, PM_PIRATE_BROTHER, PM_BLACKBEARD_S_GHOST,
+	PM_SKELETAL_PIRATE, PM_SOLDIER, S_RODENT, S_ELEMENTAL, /* Ghost pirates, soldiers, rats in the food stores, and the occasional storm*/
+	ART_TREASURE_CHEST_OF_BLACKBEA,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_CHAOTIC|ROLE_NEUTRAL,
 	/* Str Int Wis Dex Con Cha */

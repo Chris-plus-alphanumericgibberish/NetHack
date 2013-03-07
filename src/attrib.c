@@ -59,7 +59,8 @@ const struct innate {
 		     {  17, &(HTeleport_control), "controlled","uncontrolled" },
 		     {   0, 0, 0, 0 } },
 
-	pir_abil[] = { {	7, &(HStealth), "stealthy", ""  },	/* with cat-like tread ... */
+	pir_abil[] = {	{1, &(HSwimming), "", ""  },
+			 {	7, &(HStealth), "stealthy", ""  },	/* with cat-like tread ... */
 		     {  11, &(HFast), "quick", "slow" },
 		     {	 0, 0, 0, 0 } },
 
