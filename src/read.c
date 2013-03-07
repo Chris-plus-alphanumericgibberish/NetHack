@@ -906,7 +906,7 @@ register struct obj	*sobj;
 		    if (Hallucination)
 			You_feel("in touch with the Universal Oneness.");
 		    else
-			You_feel("like someone is helping you.");
+			You_feel("like someone %s helping you.", vtense((char *)0,"are"));
 
 		if (sobj->cursed) {
 		    pline_The("scroll disintegrates.");
@@ -1045,7 +1045,7 @@ register struct obj	*sobj;
 		if(confused)
 			You("identify this as an identify scroll.");
 		else
-			pline("This is an identify scroll.");
+			pline("This %s an identify scroll.", vtense((char *)0,"are"));
 		if (sobj->blessed || (!sobj->cursed && !rn2(5))) {
 			cval = rn2(5);
 			/* Note: if rn2(5)==0, identify all items */
@@ -1070,14 +1070,14 @@ register struct obj	*sobj;
 		    break;
 		}
 		known = TRUE;
-		pline("This is a charging scroll.");
+		pline("This %s a charging scroll.", vtense((char *)0,"are"));
 		otmp = getobj(all_count, "charge");
 		if (!otmp) break;
 		recharge(otmp, sobj->cursed ? -1 : (sobj->blessed ? 1 : 0));
 		break;
 	case SCR_MAGIC_MAPPING:
 		if (level.flags.nommap) {
-		    Your("mind is filled with crazy lines!");
+		    Your("mind %s filled with crazy lines!", vtense((char *)0,"are"));
 		    if (Hallucination)
 			pline("Wow!  Modern art.");
 		    else
@@ -1212,7 +1212,7 @@ register struct obj	*sobj;
 				int mdmg;
 
 				if (cansee(mtmp->mx, mtmp->my)) {
-				    pline("%s is hit by %s!", Monnam(mtmp),
+				    pline("%s %s hit by %s!", Monnam(mtmp), vtense((char *)0,"are"),
 	    	    	    			doname(otmp2));
 				    if (mtmp->minvis && !canspotmon(mtmp))
 					map_invisible(mtmp->mx, mtmp->my);
@@ -1221,7 +1221,8 @@ register struct obj	*sobj;
 				if (helmet) {
 				    if(is_metallic(helmet)) {
 					if (canspotmon(mtmp))
-					    pline("Fortunately, %s is wearing a hard helmet.", mon_nam(mtmp));
+					    pline("Fortunately, %s %s wearing a hard helmet.", 
+							mon_nam(mtmp), vtense((char *)0,"are"));
 					else if (flags.soundok)
 					    You_hear("a clanging sound.");
 					if (mdmg > 2) mdmg = 2;
@@ -1312,7 +1313,7 @@ register struct obj	*sobj;
 		break;
 	}
 	default:
-		impossible("What weird effect is this? (%u)", sobj->otyp);
+		impossible("What weird effect %s this? (%u)", vtense((char *)0,"are"), sobj->otyp);
 	}
 	return(0);
 }
@@ -1378,9 +1379,11 @@ struct obj *obj;
 		if (Blind) goto do_it;
 		if(u.uswallow){
 			if (is_animal(u.ustuck->data))
-				pline("%s %s is lit.",
+				pline("%s %s %s lit.",
 				        s_suffix(Monnam(u.ustuck)),
-					mbodypart(u.ustuck, STOMACH));
+					mbodypart(u.ustuck, STOMACH), 
+					vtense((char *)0,"are")
+					);
 			else
 				if (is_whirly(u.ustuck->data))
 					pline("%s shines briefly.",

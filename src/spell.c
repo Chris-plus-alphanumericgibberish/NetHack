@@ -224,7 +224,8 @@ struct obj *book2;
 	if(!u.uhave.bell || !u.uhave.menorah) {
 	    pline("A chill runs down your %s.", body_part(SPINE));
 	    if(!u.uhave.bell) You_hear("a faint chime...");
-	    if(!u.uhave.menorah) pline("Vlad's doppelganger is amused.");
+	    if(!u.uhave.menorah) pline("Vlad's doppelganger %s amused.", 
+			vtense((char *)0,"are"));
 	    return;
 	}
 
@@ -243,7 +244,7 @@ struct obj *book2;
 
 	if(arti_cursed) {
 	    pline_The("invocation fails!");
-	    pline("At least one of your artifacts is cursed...");
+	    pline("At least one of your artifacts %s cursed...", vtense((char *)0,"are"));
 	} else if(arti1_primed && arti2_primed) {
 	    unsigned soon = (unsigned) d(2,6);	/* time til next intervene() */
 
@@ -255,7 +256,7 @@ struct obj *book2;
 	    u.uevent.udemigod = 1;	/* wizdead() */
 	    if (!u.udg_cnt || u.udg_cnt > soon) u.udg_cnt = soon;
 	} else {	/* at least one artifact not prepared properly */
-	    You("have a feeling that %s is amiss...", something);
+	    You("have a feeling that %s %s amiss...", something, vtense((char *)0,"are"));
 	    goto raise_dead;
 	}
 	return;
@@ -346,10 +347,10 @@ learn()
 	for (i = 0; i < MAXSPELL; i++)  {
 		if (spellid(i) == booktype)  {
 			if (book->spestudied > MAX_SPELL_STUDY) {
-			    pline("This spellbook is too faint to be read any more.");
+			    pline("This spellbook %s too faint to be read any more.", vtense((char *)0,"are"));
 			    book->otyp = booktype = SPE_BLANK_PAPER;
 			} else if (spellknow(i) <= 1000) {
-			    Your("knowledge of %s is keener.", splname);
+			    Your("knowledge of %s %s keener.", splname, vtense((char *)0,"are"));
 			    incrnknow(i);
 			    book->spestudied++;
 			    exercise(A_WIS,TRUE);       /* extra study */
@@ -402,7 +403,7 @@ register struct obj *spellbook;
 	} else {
 		/* KMH -- Simplified this code */
 		if (booktype == SPE_BLANK_PAPER) {
-			pline("This spellbook is all blank.");
+			pline("This spellbook %s all blank.", vtense((char *)0,"are"));
 			makeknown(booktype);
 			return(1);
 		}
@@ -446,7 +447,7 @@ register struct obj *spellbook;
 			    !confused) {
 			    char qbuf[QBUFSZ];
 			    Sprintf(qbuf,
-		      "This spellbook is %sdifficult to comprehend. Continue?",
+		      "This spellbook %s %sdifficult to comprehend. Continue?", vtense((char *)0,"are"),
 				    (read_ability < 12 ? "very " : ""));
 			    if (yn(qbuf) != 'y') {
 				spellbook->in_use = FALSE;
@@ -725,14 +726,14 @@ boolean atme;
 	 * decrement of spell knowledge is done every turn.
 	 */
 	if (spellknow(spell) <= 0) {
-	    Your("knowledge of this spell is twisted.");
+	    Your("knowledge of this spell %s twisted.", vtense((char *)0,"are"));
 	    pline("It invokes nightmarish images in your mind...");
 	    spell_backfire(spell);
 	    return(0);
 	} else if (spellknow(spell) <= 100) {
 	    You("strain to recall the spell.");
 	} else if (spellknow(spell) <= 1000) {
-	    Your("knowledge of this spell is growing faint.");
+	    Your("knowledge of this spell %s growing faint.", vtense((char *)0,"are"));
 	}
 	energy = (spellev(spell) * 5);    /* 5 <= energy <= 35 */
 
@@ -879,7 +880,7 @@ boolean atme;
 			if (atme) u.dx = u.dy = u.dz = 0;
 			else if (!getdir((char *)0)) {
 			    /* getdir cancelled, re-use previous direction */
-			    pline_The("magical energy is released!");
+			    pline_The("magical energy %s released!", vtense((char *)0,"are"));
 			}
 			if(!u.dx && !u.dy && !u.dz) {
 			    if ((damage = zapyourself(pseudo, TRUE)) != 0) {
@@ -985,7 +986,7 @@ throwspell()
 	    pline_The("spell dissipates over the distance!");
 	    return 0;
 	} else if (u.uswallow) {
-	    pline_The("spell is cut short!");
+	    pline_The("spell %s cut short!", vtense((char *)0,"are"));
 	    exercise(A_WIS, FALSE); /* What were you THINKING! */
 	    u.dx = 0;
 	    u.dy = 0;
