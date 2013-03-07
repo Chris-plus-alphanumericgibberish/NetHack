@@ -96,6 +96,21 @@ static struct trobj Monk[] = {
 	{ FORTUNE_COOKIE, 0, FOOD_CLASS, 3, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
+static struct trobj Pirate[] = {
+#define PIR_KNIVES	1
+#define PIR_SNACK 4
+#define PIR_JEWELRY 6
+#define PIR_TOOL 7
+	{ SCIMITAR, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
+	{ KNIFE, 1, WEAPON_CLASS, 2, 0 },
+	{ HIGH_BOOTS, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
+	{ CRAM_RATION, 0, FOOD_CLASS, 2, UNDEF_BLESS },
+	{ BANANA, 0, FOOD_CLASS, 3, 0 },
+	{ POT_BOOZE, 0, POTION_CLASS, 3, UNDEF_BLESS },
+	{ UNDEF_TYP, UNDEF_SPE, RING_CLASS, 1, UNDEF_BLESS },
+	{ OILSKIN_SACK, 0, TOOL_CLASS, 1, 0 },
+	{ 0, 0, 0, 0, 0 }
+};
 static struct trobj Priest[] = {
 	{ MACE, 1, WEAPON_CLASS, 1, 1 },
 	{ ROBE, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -364,6 +379,24 @@ static const struct def_skill Skill_P[] = {
     { P_HEALING_SPELL, P_EXPERT },	{ P_DIVINATION_SPELL, P_EXPERT },
     { P_CLERIC_SPELL, P_EXPERT },
     { P_BARE_HANDED_COMBAT, P_BASIC },
+    { P_NONE, 0 }
+};
+
+static const struct def_skill Skill_Pir[] = {
+    { P_DAGGER, P_SKILLED },	{ P_KNIFE,  P_EXPERT },
+    { P_AXE, P_SKILLED },	    { P_SHORT_SWORD, P_BASIC },
+	{ P_BROAD_SWORD, P_EXPERT },{ P_LONG_SWORD, P_BASIC },
+	{ P_SCIMITAR, P_EXPERT },	{ P_SABER, P_EXPERT },
+	{ P_CLUB, P_BASIC },		{ P_MORNING_STAR, P_SKILLED },
+    { P_FLAIL, P_EXPERT },		{ P_SPEAR, P_SKILLED },
+	{ P_JAVELIN, P_SKILLED },	{ P_TRIDENT, P_EXPERT },
+    { P_CROSSBOW, P_EXPERT },   { P_DART, P_SKILLED },
+    { P_WHIP, P_SKILLED },   	{ P_UNICORN_HORN, P_BASIC },
+
+	{ P_ATTACK_SPELL, P_BASIC },{ P_DIVINATION_SPELL, P_BASIC },
+	{ P_ENCHANTMENT_SPELL, P_BASIC },{ P_ESCAPE_SPELL, P_SKILLED },
+    { P_TWO_WEAPON_COMBAT, P_SKILLED },
+    { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
 };
 
@@ -660,6 +693,23 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_Mon);
 		break;
+	case PM_PIRATE:
+#ifndef GOLDOBJ
+		u.ugold = u.ugold0 = rnd(300);
+#else
+		u.umoney0 = rnd(300);
+#endif
+		Pirate[PIR_KNIVES].trquan = rn1(2, 2);
+		if(!rn2(4)) Pirate[PIR_SNACK].trotyp = KELP_FROND;
+		Pirate[PIR_SNACK].trquan += rn2(4);
+		if(rn2(100)<50)	Pirate[PIR_JEWELRY].trotyp = RIN_ADORNMENT;
+		if(rn2(100)<50)	Pirate[PIR_TOOL].trotyp = GRAPPLING_HOOK;
+		ini_inv(Pirate);
+		knows_object(OILSKIN_SACK);
+		knows_object(OILSKIN_CLOAK);
+		knows_object(GRAPPLING_HOOK);
+		skill_init(Skill_Pir);
+		break;
 	case PM_PRIEST:
 		ini_inv(Priest);
 		if(!rn2(10)) ini_inv(Magicmarker);
@@ -860,6 +910,7 @@ int otyp;
      case PM_HEALER:		skills = Skill_H; break;
      case PM_KNIGHT:		skills = Skill_K; break;
      case PM_MONK:		skills = Skill_Mon; break;
+	 case PM_PIRATE:		skills = Skill_Pir; break;
      case PM_PRIEST:		skills = Skill_P; break;
      case PM_RANGER:		skills = Skill_Ran; break;
      case PM_ROGUE:		skills = Skill_R; break;
@@ -899,6 +950,9 @@ register struct trobj *trop;
 				}
 			}
 			obj = mksobj(otyp, TRUE, FALSE);
+			/* Don't start with +0 or negative rings */
+			if (objects[obj->otyp].oc_charged && obj->spe <= 0)
+				obj->spe = rne(3);
 		} else {	/* UNDEF_TYP */
 			static NEARDATA short nocreate = STRANGE_OBJECT;
 			static NEARDATA short nocreate2 = STRANGE_OBJECT;

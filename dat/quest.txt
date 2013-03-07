@@ -1564,6 +1564,256 @@ the Astral plane.  I suspect that I shall never see you again in this
 life, but I hope to at %ds feet."
 %E
 #
+#	Pirate
+#
+%Cc Pir 00001
+You breathe a sigh of relief as you find yourself back in the familiar
+surroundings of %H.
+
+You quickly notice that things do not appear the way they did when you
+left.  The town is dark and quiet.  There are no sounds coming from
+behind the town walls, and no campfires burning in the fields.  As a
+matter of fact, you do not %x any movement in the fields at all, and
+the crops look as though they have been untended for many weeks.
+%E
+%Cp Pir 00002
+Once again, you are back at %H.
+%E
+%Cp Pir 00003
+You are back at %H.
+Things appear to have become so bad that you fear that soon
+%H will not be here to return to.
+%E
+%Cp Pir 00005
+"Gehennom on 5 zorkmids a day -- more like 500 a day if you ask me."
+%E
+%Cp Pir 00006
+"Do you know where I could find some nice postcards of The Gnomish Mines?"
+%E
+%Cp Pir 00007
+"Have you tried the weird toilets?"
+%E
+%Cp Pir 00008
+"Don't stay at the Inn, I hear the food is terrible and it has rats."
+%E
+%Cp Pir 00009
+"They told me that this was the off season!"
+%E
+%Cp Pir 00010
+"Gehennom on 5 zorkmids a day -- more like 500 a day if you ask me."
+%E
+%Cp Pir 00011
+"Do you know where I could find some nice postcards of The Gnomish Mines?"
+%E
+%Cp Pir 00012
+"Have you tried the weird toilets?"
+%E
+%Cp Pir 00013
+"If you stick around, I'll show you the pictures from my latest trip."
+%E
+%Cp Pir 00014
+"Did you bring me back any souvenirs?"
+%E
+%Cc Pir 00015
+"Is it really you, %p!  I had given up hope for your return.
+As you can %x, we are desperately in need of your talents.  Someone must
+defeat %n if our town is become what it once was.
+
+"Let me see if you are ready to be that someone."
+%E
+%Cp Pir 00016
+"Things are getting worse, %p.
+I hope that this time you are ready."
+%E
+%Cp Pir 00017
+"I hope that for the sake of %H you have prepared
+yourself this time."
+%E
+%Cc Pir 00018
+"It is too late, %p.  You are not even worthy to die amongst us.
+Leave %H and never return."
+%E
+%Cc Pir 00019
+"There is still too much that you have to learn before you can undertake
+the next step.  Return to us as a proven %R, and perhaps then
+you will be ready.
+
+"Go back now, and may the teachings of %d serve you well."
+%E
+%Cc Pir 00020
+"It would be an affront to %d to have one not true to the
+%a path undertake her bidding.
+
+"You must not return to us until you have purified yourself of these
+bad influences on your actions.  Remember, only by following the %a
+path can you hope to overcome the obstacles you will face."
+%E
+%Cc Pir 00021
+"You have indeed proven yourself a worthy %c, %p.
+
+"But now your kinfolk and I must ask you to put aside your travels and
+help us in our time of need.  After you left us we elected a new mayor,
+%n.  He proved to be a most heinous and vile creature.
+
+"Soon after taking office he absconded with %o
+and fled town, leaving behind his henchmen to rule over us.  In order
+for us to regain control of our town, you must enter %i
+and recover %o.
+
+"Do not be distracted on your quest.  If you do not return quickly I fear
+that all will be lost.  Let us both pray now that %d will guide you
+and keep you safe."
+%E
+%Cp Pir 00025
+"Do not be fooled by the false promises of %n."
+%E
+%Cp Pir 00026
+"To enter %i you must pass many traps."
+%E
+%Cp Pir 00027
+"If you do not return with %o, your quest
+will be in vain."
+%E
+%Cp Pir 00028
+"Do not be afraid to call upon %d if you truly need help."
+%E
+%Cp Pir 00029
+"If you do not destroy %n, he will follow you back here!"
+%E
+%Cp Pir 00030
+"Take %o from %n
+and you may be able to defeat him."
+%E
+%Cp Pir 00031
+"You must hurry, %p!"
+%E
+%Cp Pir 00032
+"You are like %Sa to me, %p.  Do not let me down."
+%E
+%Cp Pir 00033
+"If you are %a at all times you may succeed, %p."
+%E
+%Cp Pir 00034
+"Let all who meet you on your journey know that you are on an quest for
+%l and grant safe passage."
+%E
+%Cc Pir 00035
+Only your faith in %d keeps you from trembling.  You %x
+the handiwork of %ns henchlings everywhere.
+%E
+%Cp Pir 00036
+You know that this time you must find and destroy %n.
+%E
+%Cc Pir 00040
+You sense the presence of %o.
+%E
+%Cp Pir 00041
+You gain confidence, knowing that you may soon be united with
+%o.
+%E
+%Cc Pir 00050
+"So, %p, %l thinks that you can wrest
+%o from me!
+
+"It only proves how desperate he has become that he sends %ra to
+try and defeat me.  When this day is over, I will have you enslaved
+in the mines where you will rue the day that you ever entered
+%i."
+%E
+%Cp Pir 00051
+"I let you live the last time because it gave me pleasure.
+This time I will destroy you, %p."
+%E
+%Cc Pir 00052
+"These meetings come to bore me.  You disturb my workings with
+%o.
+
+"If you do not run away now, I will inflict so much suffering on you that
+%l will feel guilty for ever having sent his %S to me!"
+%E
+%Cc Pir 00053
+"You fool.  You do not know how to call upon the powers of
+%o.
+
+"Return it to me and I will teach you how to use it, and together we
+will rule %H.  But do so now, as my patience
+grows thin."
+%E
+%Cp Pir 00060
+"I defeated %l and I will defeat you, %p."
+%E
+%Cp Pir 00061
+"Where is %d now!  You must realize no one can help you here."
+%E
+%Cp Pir 00062
+"Beg for mercy now and I may be lenient on you."
+%E
+%Cp Pir 00063
+"If you were not so %a, you might have stood a chance."
+%E
+%Cp Pir 00064
+"Vengeance is mine at last, %p."
+%E
+%Cp Pir 00065
+"I only wish that %l had a more worthy %r to send against me."
+%E
+%Cp Pir 00066
+"With %o in my possession you cannot
+hope to defeat me."
+%E
+%Cp Pir 00067
+"%nC has never been defeated, NEVER!"
+%E
+%Cp Pir 00068
+"Are you truly the best %H has to send against me?
+I pity %l."
+%E
+%Cp Pir 00069
+"How do you spell %p?  I want to ensure the marker on your grave is
+correct as a warning to your %sp."
+%E
+%Cc Pir 00070
+As you pick up %o, you feel a great
+weight has been lifted from your shoulders.  Your only thoughts are
+to quickly return to %H and find %l.
+%E
+%Cc Pir 00080
+You turn in the direction of %n.  As his earthly body begins
+to vanish before your eyes, you hear him curse:
+
+    You shall never be rid of me, %p!
+    I will find you where ever you go and regain what is rightly mine.
+%E
+%Cc Pir 00081
+As %l detects the presence of %o,
+he almost smiles for the first time in many a full moon.
+
+As he looks up from %o he says:
+
+    You have recovered %o.  You are its
+    owner now, but not its master.  Let it work with you as you continue
+    your journey.  With its help, and %d to guide you on the
+    %a path, you may yet recover the Amulet of Yendor.
+%E
+%Cc Pir 00082
+"%oC is yours now.  %Z await your
+return through the magic portal that brought you here."
+%E
+%Cp Pir 00090
+"I could not be more proud than if you were my own %S, %p!
+Tell me of your adventures in quest of the Amulet of Yendor."
+%E
+%Cc Pir 00091
+"Stand back and let me look at you, %p.
+Now that you have recovered the Amulet of Yendor, I'm afraid living
+out your days in %H would seem pretty tame.
+
+"You have come too far to stop now, for there are still more tasks that
+our oral history foretells for you.  Forever more, though, your name shall
+be spoken by the %gP with awe.  You are truly an inspiration to your
+%sp!"
+%E
+#
 #	Priest
 #
 %Cc Pri 00001

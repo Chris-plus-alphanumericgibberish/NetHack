@@ -206,6 +206,32 @@ const struct Role roles[] = {
 	{  4, 3,  0, 2,  0, 2 },10,	/* Energy */
 	0, 3,-2, 2, 10, A_WIS, SPE_REMOVE_CURSE,    -4
 },
+{	{"Pirate", 0}, {
+	{"Landlubber",  0},
+	{"Sailor",      0},
+	{"Mariner",     0},
+	{"Mutineer",    0},
+	{"Buccaneer",   0},
+	{"Cutthroat",   0},
+	{"Corsair",     0},
+	{"Privateer",   0},
+	{"Dread Pirate",0} },
+	"Nereus", "Neptune", "Proteus",	/* Classical sea gods */
+	"Pir", "the Pirate King's lair", "the Major General's estate",
+	PM_PIRATE, NON_PM, NON_PM,
+	PM_PIRATE_KING, PM_BUCCANEER, PM_MAJOR_GENERAL,
+	PM_SOLDIER, PM_SERGEANT, S_KOP, S_HUMAN,
+	ART_MARAUDER_S_MAP,
+	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
+	  ROLE_CHAOTIC|ROLE_NEUTRAL,
+	/* Str Int Wis Dex Con Cha */
+	{   8,  7, 7,  8,  8,  7 },
+	{  20, 15, 10, 20, 25, 10 },
+	/* Init   Lower  Higher */
+	{ 10, 0,  0, 8,  1, 0 },	/* Hit points */
+	{  1, 0,  0, 1,  0, 1 },12,	/* Energy */
+	10, 8, 0, 2,  9, A_INT, SPE_CAUSE_FEAR,    -4
+},
   /* Note:  Rogue precedes Ranger so that use of `-R' on the command line
      retains its traditional meaning. */
 {	{"Rogue", 0}, {
@@ -1454,6 +1480,8 @@ struct monst *mtmp;
 	case PM_SAMURAI:
 	    return (mtmp && mtmp->data == &mons[PM_SHOPKEEPER] ?
 	    		"Irasshaimase" : "Konnichi wa"); /* Japanese */
+	case PM_PIRATE:
+		return ("Ahoy");
 #ifdef TOURIST
 	case PM_TOURIST:
 	    return ("Aloha");       /* Hawaiian */

@@ -123,7 +123,13 @@ doread()
 	    return(study_book(scroll));
 	}
 	scroll->in_use = TRUE;	/* scroll, not spellbook, now being read */
-	if(scroll->otyp != SCR_BLANK_PAPER) {
+	if(scroll->oartifact) {
+		if(Blind) {
+			pline("Being blind, you cannot see the %s.", the(xname(scroll)));
+			return 0;
+		}
+		pline("You examine %s.", the(xname(scroll)));
+	} else if(scroll->otyp != SCR_BLANK_PAPER) {
 	  if(Blind)
 	    pline("As you %s the formula on it, the scroll disappears.",
 			is_silent(youmonst.data) ? "cogitate" : "pronounce");
@@ -145,7 +151,7 @@ doread()
 		    } else if(!objects[scroll->otyp].oc_uname)
 			docall(scroll);
 		}
-		if(scroll->otyp != SCR_BLANK_PAPER)
+		if(scroll->otyp != SCR_BLANK_PAPER && !scroll->oartifact)
 			useup(scroll);
 		else scroll->in_use = FALSE;
 	}

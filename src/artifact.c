@@ -1349,6 +1349,9 @@ arti_invoke(obj)
 				       aobjnam(otmp, "fall"), (const char *)0);
 	    break;
 	  }
+	case OBJECT_DET:
+		object_detect(obj, 0);
+		break;
 	}
     } else {
 	long eprop = (u.uprops[oart->inv_prop].extrinsic ^= W_ARTI),
