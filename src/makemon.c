@@ -254,9 +254,48 @@ register struct monst *mtmp;
 			if(!rn2(2)) curse(otmp);
 			(void) mpickobj(mtmp, otmp);
 		    }
+		} else if (mm == PM_PIRATE_BROTHER){
+			(void)mongets(mtmp, SCIMITAR);
+			(void)mongets(mtmp, LEATHER_ARMOR);
+			(void)mongets(mtmp, HIGH_BOOTS);
+		} else if (mm == PM_MAYOR_CUMMERBUND){
+			int spe2;
+		    otmp = mksobj(SCIMITAR, FALSE, FALSE);
+		    curse(otmp);
+		    otmp->oerodeproof = TRUE;
+		    spe2 = d(1,3);
+		    otmp->spe = max(otmp->spe, spe2);
+		    (void) mpickobj(mtmp, otmp);
+			
+		    otmp = mksobj(LEATHER_JACKET, FALSE, FALSE);
+		    otmp->oerodeproof = TRUE;
+		    spe2 = d(2,3);
+		    otmp->spe = max(otmp->spe, spe2);
+		    (void) mpickobj(mtmp, otmp);
+			
+		    otmp = mksobj(SMALL_SHIELD, FALSE, FALSE);
+		    otmp->oerodeproof = TRUE;
+		    spe2 = d(1,3);
+		    otmp->spe = max(otmp->spe, spe2);
+		    (void) mpickobj(mtmp, otmp);
+
+			(void)mongets(mtmp, LEATHER_CLOAK);
+			(void)mongets(mtmp, HIGH_BOOTS);
+			(void)mongets(mtmp, LEATHER_GLOVES);
 		}
 		break;
-
+		case S_GHOST:
+		if(mm == PM_BLACKBEARD_S_GHOST){
+			int spe2;
+		    otmp = mksobj(SCIMITAR, FALSE, FALSE);
+		    curse(otmp);
+		    otmp->oerodeproof = TRUE;
+			otmp->oeroded = 1;
+		    spe2 = d(2,3);
+		    otmp->spe = max(otmp->spe, spe2);
+		    (void) mpickobj(mtmp, otmp);
+		}
+		break;
 	    case S_ANGEL:
 		{
 		    int spe2;
@@ -316,6 +355,11 @@ register struct monst *mtmp;
 		    } else {
 			(void)mongets(mtmp, !rn2(3) ? PICK_AXE : DAGGER);
 		    }
+		} else if(mm == PM_GITHYANKI_PIRATE){
+			(void)mongets(mtmp, TWO_HANDED_SWORD);
+			(void)mongets(mtmp, BRONZE_PLATE_MAIL);
+			(void)mongets(mtmp, LEATHER_GLOVES);
+			(void)mongets(mtmp, HIGH_BOOTS);
 		}
 		break;
 # ifdef KOPS
@@ -386,6 +430,18 @@ register struct monst *mtmp;
 		(void)mongets(mtmp, LONG_SWORD);
 		break;
 	    case S_ZOMBIE:
+		if(mm == PM_SKELETAL_PIRATE){
+		    otmp = rn2(2) ? mksobj(SCIMITAR, FALSE, FALSE) : mksobj(KNIFE, FALSE, FALSE);
+		    curse(otmp);
+			otmp->oeroded = 1;
+		    (void) mpickobj(mtmp, otmp);
+			
+		    otmp = rn2(2) ? mksobj(HIGH_BOOTS, FALSE, FALSE) : mksobj(LEATHER_JACKET, FALSE, FALSE);
+		    curse(otmp);
+			otmp->oeroded2 = 1;
+		    (void) mpickobj(mtmp, otmp);
+			break;
+		}
 		if (!rn2(4)) (void)mongets(mtmp, LEATHER_ARMOR);
 		if (!rn2(4))
 			(void)mongets(mtmp, (rn2(3) ? KNIFE : SHORT_SWORD));
@@ -397,6 +453,16 @@ register struct monst *mtmp;
 		break;
 	    case S_DEMON:
 		switch (mm) {
+			case PM_DAMNED_PIRATE:
+				otmp = mksobj(SCIMITAR, FALSE, FALSE);
+				curse(otmp);
+				(void) mpickobj(mtmp, otmp);
+				
+				otmp = mksobj(LEATHER_ARMOR, FALSE, FALSE);
+				curse(otmp);
+				otmp->oeroded = 1;
+				(void) mpickobj(mtmp, otmp);
+			break;
 		    case PM_BALROG:
 			(void)mongets(mtmp, BULLWHIP);
 			(void)mongets(mtmp, BROADSWORD);
@@ -417,7 +483,7 @@ register struct monst *mtmp;
 		/* prevent djinnis and mail daemons from leaving objects when
 		 * they vanish
 		 */
-		if (!is_demon(ptr)) break;
+		if (!is_demon(ptr) && mm != PM_DAMNED_PIRATE) break;
 		/* fall thru */
 /*
  *	Now the general case, Some chance of getting some type

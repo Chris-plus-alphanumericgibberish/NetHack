@@ -219,9 +219,9 @@ const struct Role roles[] = {
 	"the Lord", "_the deep blue sea", "the Devil",	/* Christian, sorta */
 	"Pir", "Tortuga", "Shipwreak Island",
 	PM_PIRATE, NON_PM, NON_PM,
-	PM_DREAD_PIRATE__RET__, PM_PIRATE_BROTHER, PM_BLACKBEARD_S_GHOST,
+	PM_MAYOR_CUMMERBUND, PM_PIRATE_BROTHER, PM_BLACKBEARD_S_GHOST,
 	PM_SKELETAL_PIRATE, PM_SOLDIER, S_RODENT, S_ELEMENTAL, /* Ghost pirates, soldiers, rats in the food stores, and the occasional storm*/
-	ART_TREASURE_CHEST_OF_BLACKBEA,
+	ART_TREASURY_OF_PROTEUS,
 	MH_HUMAN | ROLE_MALE|ROLE_FEMALE |
 	  ROLE_CHAOTIC|ROLE_NEUTRAL,
 	/* Str Int Wis Dex Con Cha */

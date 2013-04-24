@@ -56,6 +56,7 @@ STATIC_OVL struct Jitem Pirate_items[] = {
 	{ POT_BOOZE, "rum" },
 	{ CRAM_RATION, "sea biscuit" },
 	{ SCIMITAR, "cutlass" },
+	{ SMALL_SHIELD, "buckler" },
 	{ SACK, "ditty bag" },
 	{ LARGE_BOX, "foot locker" },
 	{ CLUB, "belaying pin" },
