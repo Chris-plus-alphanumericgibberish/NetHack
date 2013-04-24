@@ -196,7 +196,7 @@ MONSTER:'&',"incubus",(52,13)
 OBJECT:'?',"scare monster",(52,14), cursed, 0
 
 # Dread Pirate (ret.)
-MONSTER:'@',"Dread Pirate (ret.)",(51,10)
+MONSTER:'@',"Mayor Cummerbund",(51,10)
 # The treasure of the Dread Pirate
 OBJECT:'(',"chest",(52,10)
 # Guards for the audience chamber
