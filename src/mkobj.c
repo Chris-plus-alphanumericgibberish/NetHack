@@ -803,6 +803,10 @@ register struct obj *obj;
 {
 	int wt = objects[obj->otyp].oc_weight;
 
+	if(obj->oartifact == ART_TREASURY_OF_PROTEUS){
+		wt =  150; /* Same as a crystal ball (ie, the Orb of Weight) */
+	}
+
 	if (obj->otyp == LARGE_BOX && obj->spe == 1) /* Schroedinger's Cat */
 		wt += mons[PM_HOUSECAT].cwt;
 	if (Is_container(obj) || obj->otyp == STATUE) {

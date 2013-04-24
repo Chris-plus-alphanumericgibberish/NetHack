@@ -940,7 +940,7 @@ register const char *txt;
 	if(obj->dknown && !objects[obj->otyp].oc_name_known &&
 						!objects[obj->otyp].oc_uname)
 		docall(obj);
-	useup(obj);
+	if(!(obj->oartifact)) useup(obj);
 }
 
 const char *bottlenames[] = {

@@ -1019,7 +1019,7 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 	}
 	if(otmp->oartifact == ART_REAVER){
 	 if(youattack){
-	  if(mdef->minvent){
+	  if(mdef->minvent && (Role_if(PM_PIRATE) || !rn2(10) ) ){
 		struct obj *otmp2, **minvent_ptr;
 		long unwornmask;
 
@@ -1036,7 +1036,10 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 				update_mon_intrinsics(mdef, otmp2, FALSE, FALSE);
 			}
 			/* give the object to the character */
-			otmp2 = hold_another_object(otmp2, "You snatched but dropped %s.",
+			otmp2 = Role_if(PM_PIRATE) ? 
+				hold_another_object(otmp2, "Ye snatched but dropped %s.",
+						   doname(otmp2), "Ye steal: ") :
+				hold_another_object(otmp2, "You snatched but dropped %s.",
 						   doname(otmp2), "You steal: ");
 			if (otmp2->otyp == CORPSE &&
 				touch_petrifies(&mons[otmp2->corpsenm]) && !uarmg) {
@@ -1546,6 +1549,60 @@ struct obj *otmp;
 	    return (artilist[(int) otmp->oartifact].cost);
 	else
 	    return (100L * (long)objects[otmp->otyp].oc_cost);
+}
+
+static const char *random_seasound[] = {
+	"distant waves",
+	"distant surf",
+	"the distant sea",
+	"the call of the ocean",
+	"waves against the shore",
+	"flowing water",
+	"the sighing of waves",
+	"quarrelling gulls",
+	"the song of the deep",
+	"rumbling in the deeps",
+	"the singing of Eidothea",
+	"the laughter of the protean nymphs",
+	"rushing tides",
+	"the elusive sea change",
+	"the silence of the sea",
+	"the passage of the albatross",
+	"dancing raindrops",
+	"coins rolling on the seabed",
+	"treasure galleons crumbling in the depths",
+	"waves lapping against a hull"
+};
+
+/* Polymorph obj contents */
+void
+arti_poly_contents(obj)
+    struct obj *obj;
+{
+    struct obj *dobj = 0;  /*object to be deleted*/
+    struct obj *otmp;
+	You_hear("%s.",random_seasound[rn2(SIZE(random_seasound))]);
+	for (otmp = obj->cobj; otmp; otmp = otmp->nobj){
+		if (dobj) {
+			delobj(dobj);
+			dobj = 0;
+		}
+		if(!obj_resists(otmp, 5, 95)){
+			/* KMH, conduct */
+			u.uconduct.polypiles++;
+			/* any saved lock context will be dangerously obsolete */
+			if (Is_box(otmp)) (void) boxlock(otmp, obj);
+
+			if (obj_shudders(otmp)) {
+				dobj = otmp;
+			}
+			else otmp = poly_obj(otmp, STRANGE_OBJECT);
+		}
+	}
+	if (dobj) {
+		delobj(dobj);
+		dobj = 0;
+	}
 }
 
 #endif /* OVLB */
