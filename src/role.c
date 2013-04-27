@@ -217,7 +217,7 @@ const struct Role roles[] = {
 	{"Pirate Lord",   	0},
 	{"Dread Pirate",  	0} },
 	"the Lord", "_the deep blue sea", "the Devil",	/* Christian, sorta */
-	"Pir", "Tortuga", "Shipwreak Island",
+	"Pir", "Tortuga", "Shipwreck Island",
 	PM_PIRATE, NON_PM, NON_PM,
 	PM_MAYOR_CUMMERBUND, PM_PIRATE_BROTHER, PM_BLACKBEARD_S_GHOST,
 	PM_SKELETAL_PIRATE, PM_SOLDIER, S_RODENT, S_ELEMENTAL, /* Ghost pirates, soldiers, rats in the food stores, and the occasional storm*/

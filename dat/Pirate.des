@@ -222,10 +222,10 @@ OBJECT:'0',"heavy iron ball",(52,08)
 NON_DIGGABLE:(00,00,75,20)
 
 #
-#	Welcome to Shipwreak Island
+#	Welcome to Shipwreck Island
 #	The "locate" level for the quest.
 #
-#	Here you make landfall on shipwreak island and 
+#	Here you make landfall on shipwreck island and 
 #	move inland towards the center of the island.
 #
 
@@ -507,7 +507,7 @@ NON_DIGGABLE:(64,06,75,14)
 NON_DIGGABLE:(56,15,75,20)
 
 #
-#	Shipwreak Island center
+#	Shipwreck Island center
 #	The "goal" level for the quest.
 #
 #	Here you meet Blackbeard's Ghost, your nemesis monster.
