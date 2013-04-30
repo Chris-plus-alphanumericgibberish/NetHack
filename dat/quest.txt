@@ -1579,7 +1579,7 @@ brethren be in need of yer assistance!
 Once again, you breathe the bouquet that is %H.
 %E
 %Cp Pir 00003
-You are back on %H.
+Ye are back on %H.
 Ye fear that soon the brethren of the coast will have to abandon 
 %H.
 %E

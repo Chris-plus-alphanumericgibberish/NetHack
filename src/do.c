@@ -699,7 +699,10 @@ int retry;
 	}
     } else {
 	/* should coordinate with perm invent, maybe not show worn items */
-	n = query_objlist("What would you like to drop?", invent,
+	n = Role_if(PM_PIRATE) ? query_objlist("What would ye like to drop?", invent,
+			USE_INVLET|INVORDER_SORT, &pick_list,
+			PICK_ANY, all_categories ? allow_all : allow_category)
+		 : query_objlist("What would you like to drop?", invent,
 			USE_INVLET|INVORDER_SORT, &pick_list,
 			PICK_ANY, all_categories ? allow_all : allow_category);
 	if (n > 0) {
