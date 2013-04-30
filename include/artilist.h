@@ -53,7 +53,7 @@ A("Stormbringer",		RUNESWORD,
 
 A("Reaver",			SCIMITAR,
 	(SPFX_NOGEN|SPFX_RESTR|SPFX_INTEL),0,0,
-	PHYS(4,8),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, PM_PIRATE, NON_PM, 6000L ),
+	PHYS(5,8),	NO_DFNS,	NO_CARY,	0, A_CHAOTIC, PM_PIRATE, NON_PM, 6000L ),
 /*
  *	Mjollnir will return to the hand of the wielder when thrown
  *	if the wielder is a Valkyrie wearing Gauntlets of Power.
