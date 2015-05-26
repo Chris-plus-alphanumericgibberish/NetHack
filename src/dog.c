@@ -30,6 +30,11 @@ register struct monst *mtmp;
 	EDOG(mtmp)->revivals = 0;
 	EDOG(mtmp)->mhpmax_penalty = 0;
 	EDOG(mtmp)->killed_by_u = 0;
+#ifdef BARD
+	EDOG(mtmp)->encouraged = 0;
+	EDOG(mtmp)->friend = 0;
+	EDOG(mtmp)->waspeaceful = 0;
+#endif
 }
 
 STATIC_OVL int
@@ -446,6 +451,11 @@ long nmv;		/* number of moves */
 	/* reduce tameness for every 150 moves you are separated */
 	if (mtmp->mtame) {
 	    int wilder = (imv + 75) / 150;
+#ifdef BARD
+	    /* monsters under influence of Friendship song go wilder faster */
+	    if (EDOG(mtmp)->friend)
+		    wilder *= 150;
+#endif
 	    if (mtmp->mtame > wilder) mtmp->mtame -= wilder;	/* less tame */
 	    else if (mtmp->mtame > rn2(wilder)) mtmp->mtame = 0;  /* untame */
 	    else mtmp->mtame = mtmp->mpeaceful = 0;		/* hostile! */

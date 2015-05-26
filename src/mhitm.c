@@ -594,6 +594,14 @@ mdamagem(magr, mdef, mattk)
 	int armpro, num, tmp = d((int)mattk->damn, (int)mattk->damd);
 	boolean cancelled;
 
+#ifdef BARD
+	if (magr->mtame && EDOG(magr)) {
+		tmp += EDOG(magr)->encouraged;
+		if (wizard && EDOG(magr)->encouraged)
+			pline("[%s +%d]", Monnam(magr), EDOG(magr)->encouraged);
+	}
+#endif
+
 	if (touch_petrifies(pd) && !resists_ston(magr)) {
 	    long protector = attk_protection((int)mattk->aatyp),
 		 wornitems = magr->misc_worn_check;

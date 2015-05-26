@@ -46,6 +46,20 @@ static struct trobj Barbarian[] = {
 	{ FOOD_RATION, 0, FOOD_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
+#ifdef BARD
+static struct trobj Bard[] = {
+#define BARD_INSTR 0
+#define BARD_BOOZE 4
+#define BARD_WHISTLE 5
+	{ WOODEN_HARP, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
+	{ LEATHER_CLOAK, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
+	{ APPLE, 0, FOOD_CLASS, 3, 0 },
+	{ ORANGE, 0, FOOD_CLASS, 3, 0 },
+	{ POT_BOOZE, 0, POTION_CLASS, 1, UNDEF_BLESS },
+	{ TIN_WHISTLE, 0, TOOL_CLASS, 1, UNDEF_BLESS },
+	{ 0, 0, 0, 0, 0 }
+};
+#endif
 static struct trobj Cave_man[] = {
 #define C_AMMO	2
 	{ CLUB, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
@@ -288,6 +302,21 @@ static const struct def_skill Skill_B[] = {
     { P_NONE, 0 }
 };
 
+#ifdef BARD
+static struct def_skill Skill_Bard[] = {
+    { P_DAGGER, P_SKILLED },		{ P_KNIFE,  P_BASIC },
+    { P_SHORT_SWORD, P_BASIC },		{ P_SCIMITAR, P_BASIC },
+    { P_CLUB, P_SKILLED },		{ P_FLAIL, P_BASIC },
+    { P_QUARTERSTAFF, P_SKILLED },	{ P_POLEARMS, P_BASIC },
+    { P_JAVELIN, P_SKILLED },		{ P_SPEAR, P_BASIC },
+    { P_SLING, P_SKILLED },		{ P_DART, P_EXPERT },
+    { P_UNICORN_HORN, P_BASIC },	{ P_CROSSBOW, P_SKILLED },
+    { P_ENCHANTMENT_SPELL, P_SKILLED },	{ P_ESCAPE_SPELL, P_BASIC },
+    { P_BARE_HANDED_COMBAT, P_EXPERT }, { P_MUSICALIZE, P_EXPERT },
+    { P_NONE, 0 }
+};
+#endif
+
 static const struct def_skill Skill_C[] = {
     { P_DAGGER, P_BASIC },		{ P_KNIFE,  P_SKILLED },
     { P_AXE, P_SKILLED },		{ P_PICK_AXE, P_BASIC },
@@ -348,6 +377,9 @@ static const struct def_skill Skill_Mon[] = {
     { P_CLERIC_SPELL, P_SKILLED },  { P_ESCAPE_SPELL, P_BASIC },
     { P_MATTER_SPELL, P_BASIC },
     { P_MARTIAL_ARTS, P_GRAND_MASTER },
+#ifdef BARD
+    { P_MUSICALIZE, P_BASIC },
+#endif
     { P_NONE, 0 }
 };
 
@@ -364,6 +396,9 @@ static const struct def_skill Skill_P[] = {
     { P_HEALING_SPELL, P_EXPERT },	{ P_DIVINATION_SPELL, P_EXPERT },
     { P_CLERIC_SPELL, P_EXPERT },
     { P_BARE_HANDED_COMBAT, P_BASIC },
+#ifdef BARD
+    { P_MUSICALIZE, P_BASIC },
+#endif
     { P_NONE, 0 }
 };
 
@@ -447,6 +482,9 @@ static const struct def_skill Skill_T[] = {
 #ifdef STEED
     { P_RIDING, P_BASIC },
 #endif
+#ifdef BARD
+    { P_MUSICALIZE, P_SKILLED },
+#endif
     { P_TWO_WEAPON_COMBAT, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
@@ -512,6 +550,52 @@ register char sym;
 		if (objects[ct].oc_class == sym && !objects[ct].oc_magic)
 			knows_object(ct);
 }
+
+#ifdef BARD
+/* Know 5 to 15 random magical objects (wands, potions, scrolls, ...)
+   For now we decide that tools while possibly magical (bag of holding/tricks,
+   magic lamp) are excempt because the Bard already knows all instruments
+   which appear to be more than enough tools.
+   We might also add GEM_CLASS with oc_material != GLASS 
+*** Contributed by Johanna Ploog */
+STATIC_OVL void
+know_random_obj()
+{
+        register int obj, count, ct;
+
+        count = rn1(11,5);
+        for (ct = 500; ct > 0 && count > 0; ct--) {
+           obj = rn2(NUM_OBJECTS);
+           if (objects[obj].oc_magic &&
+
+               /* We have to make an exception for those dummy
+                  objects (wand and scroll) that exist to allow
+                  for additional descriptions. */
+
+               obj_descr[(objects[obj].oc_name_idx)].oc_name != 0 &&
+
+              (objects[obj].oc_class == ARMOR_CLASS &&
+
+               /* Dragon scales and mails are considered magical,
+                  but as they don't have different descriptions,
+                  they don't appear in the discovery list,
+                  so as not to rob the player of an opportunity... */
+
+                !(obj > HELM_OF_TELEPATHY && obj < PLATE_MAIL) ||
+
+               objects[obj].oc_class == RING_CLASS ||
+               objects[obj].oc_class == POTION_CLASS ||
+               objects[obj].oc_class == SCROLL_CLASS ||
+               objects[obj].oc_class == SPBOOK_CLASS ||
+               objects[obj].oc_class == WAND_CLASS ||
+               objects[obj].oc_class == AMULET_CLASS))
+            {
+              knows_object(obj);
+              count--;
+            }
+        }
+}
+#endif
 
 void
 u_init()
@@ -623,6 +707,27 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_B);
 		break;
+#ifdef BARD
+	case PM_BARD:
+		if (rn2(100) >= 50) Bard[BARD_INSTR].trotyp = WOODEN_FLUTE;
+		if (rn2(100) >= 85) Bard[BARD_WHISTLE].trotyp = BELL;
+		Bard[BARD_BOOZE].trquan = rn1(2, 5);
+		ini_inv(Bard);
+		/* This depends on the order in objects.c */
+		for (i = TIN_WHISTLE; i <= DRUM_OF_EARTHQUAKE; i++)
+			knows_object(i);
+		/* Bards know about the enchantment spellbooks, though they don't know
+		   the spells */
+		knows_object(SPE_SLEEP);
+		knows_object(SPE_CONFUSE_MONSTER);
+		knows_object(SPE_SLOW_MONSTER);
+		knows_object(SPE_CAUSE_FEAR);
+		knows_object(SPE_CHARM_MONSTER);
+		/* Bards also know a lot about legendary & magical stuff. */
+		know_random_obj();
+		skill_init(Skill_Bard);
+		break;
+#endif
 	case PM_CAVEMAN:
 		Cave_man[C_AMMO].trquan = rn1(11, 10);	/* 10..20 */
 		ini_inv(Cave_man);
@@ -856,6 +961,9 @@ int otyp;
     switch (Role_switch) {
      case PM_ARCHEOLOGIST:	skills = Skill_A; break;
      case PM_BARBARIAN:		skills = Skill_B; break;
+#ifdef BARD
+     case PM_BARD:		skills = Skill_Bard; break;
+#endif
      case PM_CAVEMAN:		skills = Skill_C; break;
      case PM_HEALER:		skills = Skill_H; break;
      case PM_KNIGHT:		skills = Skill_K; break;

@@ -540,6 +540,22 @@ register int after;	/* this is extra fast monster movement */
 							after, udist, whappr);
 	if (appr == -2) return(0);
 
+#ifdef BARD
+	if (pet_can_sing(mtmp, FALSE))
+		return(3);
+	/* lose tameness if under effects of taming song */
+	if (has_edog && EDOG(mtmp)->friend && mtmp->mtame) {
+		mtmp->mtame -= (always_hostile(mtmp->data) ? 2 : 1);
+		if (mtmp->mtame <= 0) {
+			mtmp->mtame = 0;
+			EDOG(mtmp)->friend = 0;
+			mtmp->mpeaceful = EDOG(mtmp)->waspeaceful;
+		}
+		if (wizard)
+			pline("[%s friend for %d(%d)]", Monnam(mtmp), mtmp->mtame, EDOG(mtmp)->waspeaceful);
+	}
+#endif
+
 	allowflags = ALLOW_M | ALLOW_TRAPS | ALLOW_SSM | ALLOW_SANCT;
 	if (passes_walls(mtmp->data)) allowflags |= (ALLOW_ROCK | ALLOW_WALL);
 	if (passes_bars(mtmp->data)) allowflags |= ALLOW_BARS;
@@ -613,13 +629,21 @@ register int after;	/* this is extra fast monster movement */
 		    int mstatus;
 		    register struct monst *mtmp2 = m_at(nx,ny);
 
+#ifdef BARD
+		    if ((int)mtmp2->m_lev >= (int)mtmp->m_lev+2 + EDOG(mtmp)->encouraged ||
+#else
 		    if ((int)mtmp2->m_lev >= (int)mtmp->m_lev+2 ||
+#endif
 			(mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10) &&
 			 mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee
 			 && (perceives(mtmp->data) || !mtmp2->minvis)) ||
 			(mtmp2->data==&mons[PM_GELATINOUS_CUBE] && rn2(10)) ||
 			(max_passive_dmg(mtmp2, mtmp) >= mtmp->mhp) ||
+#ifdef BARD
+			((mtmp->mhp*(4+EDOG(mtmp)->encouraged) < mtmp->mhpmax
+#else
 			((mtmp->mhp*4 < mtmp->mhpmax
+#endif
 			  || mtmp2->data->msound == MS_GUARDIAN
 			  || mtmp2->data->msound == MS_LEADER) &&
 			 mtmp2->mpeaceful && !Conflict) ||
@@ -788,6 +812,13 @@ dognext:
 		newsym(cc.x,cc.y);
 		set_apparxy(mtmp);
 	}
+#ifdef BARD
+	if (EDOG(mtmp)->encouraged && (rn2(4))) {
+	    EDOG(mtmp)->encouraged--;
+	    if (!(EDOG(mtmp)->encouraged) && canseemon(mtmp))
+		pline("%s looks calm again.", Monnam(mtmp));
+	}
+#endif
 	return(1);
 }
 

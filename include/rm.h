@@ -70,6 +70,7 @@
 #define MAX_TYPE	36
 #define INVALID_TYPE	127
 
+
 /*
  * Avoid using the level types in inequalities:
  * these types are subject to change.
